@@ -26,6 +26,24 @@ In debug mode it will always display.
 
 This is the required way for requesting reviews after iOS 10.3.
 
+## How To Use
+
+```
+import 'dart:io';
+import 'package:app_review/app_review.dart';
+import 'package:flutter/material.dart';
+
+  @override
+  void initState() {
+    super.initState();
+    if (Platform.isIOS) {
+      AppReview.requestReview.then((onValue) {
+        print(onValue);
+      });
+    }
+  }
+```
+
 ## Example
 
 ```
