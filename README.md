@@ -15,7 +15,9 @@ app_review:
 ```
 import 'package:app_review/app_review.dart';
 ```
-    
+
+## How To Use
+
 #### Android
 Navigates to Store Listing in Google Play
 
@@ -25,8 +27,6 @@ For Requesting Reviews it is managed by Apple. You can call the code on the page
 In debug mode it will always display. 
 
 This is the required way for requesting reviews after iOS 10.3.
-
-## How To Use
 
 ```
 import 'dart:io';
