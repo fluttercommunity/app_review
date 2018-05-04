@@ -1,6 +1,4 @@
 # app_review
-
-Get the Version Name and Version Code on iOS and Android.
 ![alt text](https://github.com/AppleEducate/app_review/blob/master/screenshots/IMG_0024.PNG)
 
 ## Installing
