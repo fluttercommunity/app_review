@@ -1,6 +1,9 @@
 # app_review
 ![alt text](https://github.com/AppleEducate/app_review/blob/master/screenshots/IMG_0024.PNG)
 
+## Description
+Flutter Plugin for Requesting and Writing Reviews in Google Play and the App Store. Apps have to be published for the app to be found correctly. Android only supports navigating to Store Listing in Google Play.
+
 ## Installing
 
 ```
