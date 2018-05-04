@@ -20,7 +20,11 @@ import 'package:app_review/app_review.dart';
 Navigates to Store Listing in Google Play
 
 #### iOS
-For Requesting Reviews it is managed by Apple. You can call the code on the page load and if the user has rate in app turned on Apple will send the request for the pop up. In debug mode it will always display. This is the required way for requesting reviews after iOS 10.3.
+For Requesting Reviews it is managed by Apple. You can call the code on the page load and if the user has "rate in apps" turned on Apple will send the request for the review pop up. 
+
+In debug mode it will always display. 
+
+This is the required way for requesting reviews after iOS 10.3.
 
 ## Example
 
