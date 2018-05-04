@@ -7,7 +7,7 @@ Flutter Plugin for Requesting and Writing Reviews in Google Play and the App Sto
 ## Installing
 
 ```
-get_version:
+app_review:
     git:
       url: git://github.com/AppleEducate/app_review
 ```
