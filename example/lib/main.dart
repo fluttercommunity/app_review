@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:app_review/app_review.dart';
 import 'package:flutter/material.dart';
 
@@ -20,33 +18,6 @@ class _MyAppState extends State<MyApp> {
       });
       print("App ID" + appID);
     });
-  }
-
-  Future<Null> showAlertPopup(String title, String detail) async {
-    void showDemoDialog<T>({BuildContext context, Widget child}) {
-      showDialog<T>(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) => child,
-      ).then<void>((T value) {
-        if (value != null) {}
-      });
-    }
-
-    return showDemoDialog<Null>(
-        context: context,
-        child: new AlertDialog(
-            title: new Text(title),
-            content: new Text(
-              detail,
-            ),
-            actions: <Widget>[
-              new FlatButton(
-                  child: const Text('OK'),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  }),
-            ]));
   }
 
   String appID = "";
