@@ -7,7 +7,7 @@ Flutter Plugin for Requesting and Writing Reviews in Google Play and the App Sto
 ## Installing
 
 ```
-get_version:
+app_review:
     git:
       url: git://github.com/AppleEducate/app_review
 ```
@@ -15,12 +15,35 @@ get_version:
 ```
 import 'package:app_review/app_review.dart';
 ```
-    
+
+## How To Use
+It's important to note that the App ID must match the App ID in Google Play and iTunes Connect. This can be changed in the Info.plist on iOS and app/build.gradle on Android. You will use this App ID for other services like Firebase, Admob and publishing the app. 
+
 #### Android
 Navigates to Store Listing in Google Play
 
 #### iOS
-For Requesting Reviews it is managed by Apple. You can call the code on the page load and if the user has rate in app turned on Apple will send the request for the pop up. In debug mode it will always display. This is the required way for requesting reviews after iOS 10.3.
+For Requesting Reviews it is managed by Apple. You can call the code on the page load and if the user has "rate in apps" turned on Apple will send the request for the review pop up. 
+
+In debug mode it will always display. 
+
+This is the required way for requesting reviews after iOS 10.3.
+
+```
+import 'dart:io';
+import 'package:app_review/app_review.dart';
+import 'package:flutter/material.dart';
+
+  @override
+  void initState() {
+    super.initState();
+    if (Platform.isIOS) {
+      AppReview.requestReview.then((onValue) {
+        print(onValue);
+      });
+    }
+  }
+```
 
 ## Example
 
