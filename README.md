@@ -17,6 +17,7 @@ import 'package:app_review/app_review.dart';
 ```
 
 ## How To Use
+It's important to note that the App ID must match the App ID in Google Play and iTunes Connect. This can be changed in the Info.plist on iOS and app/build.gradle on Android. You will use this App ID for other services like Firebase, Admob and publishing the app. 
 
 #### Android
 Navigates to Store Listing in Google Play
