@@ -17,7 +17,7 @@ class AppReview {
     if (Platform.isIOS) {
       String _appID = await getiOSAppID;
       String details = '';
-      String _url = 'itunes.apple.com/us/app/id$_appID?action=write-review?mt=8';
+      String _url = 'itunes.apple.com/us/app/id$_appID?mt=8&action=write-review';
       if (await canLaunch("itms-apps://")) {
         print('launching store page');
         _url = "itms-apps://" + _url;
