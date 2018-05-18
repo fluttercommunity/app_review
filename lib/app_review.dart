@@ -1,6 +1,9 @@
 import 'dart:async';
-
+import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
+import 'dart:io';
+import 'dart:convert';
+import 'package:url_launcher/url_launcher.dart';
 
 class AppReview {
   static const MethodChannel _channel = const MethodChannel('app_review');
@@ -11,17 +14,55 @@ class AppReview {
   }
 
   static Future<String> get writeReview async {
-    final String details = await _channel.invokeMethod('writeReview');
-    return details;
+    if (Platform.isIOS) {
+      String _appID = await getiOSAppID;
+      String details = '';
+      if (await canLaunch("itms-apps://")) {
+        print('launching store page');
+        await launch(
+            'itms-apps://itunes.apple.com/app/id$_appID?action=write-review');
+        details = 'Launched App Store Directly';
+      } else {
+        await launch(
+            'https://itunes.apple.com/app/id$_appID?action=write-review');
+        details = 'Launched App Store';
+      }
+      return details;
+    } else {
+      final String details = await _channel.invokeMethod('writeReview');
+      return details;
+    }
   }
 
   static Future<String> get storeListing async {
-    final String details = await _channel.invokeMethod('storeListing');
+    String details = '';
+    if (Platform.isIOS) {
+      String _appID = await getiOSAppID;
+      await launch(
+          'https://itunes.apple.com/app/id$_appID?action=write-review');
+      details = 'Launched App Store';
+    } else {
+      details = await _channel.invokeMethod('storeListing');
+    }
     return details;
   }
 
   static Future<String> get getAppID async {
     final String details = await _channel.invokeMethod('getAppID');
     return details;
+  }
+
+  static Future<String> get getiOSAppID async {
+    final String _appID = await _channel.invokeMethod('getAppID');
+    String _id = '';
+    await http
+        .get('http://itunes.apple.com/lookup?bundleId=$_appID')
+        .then((response) {
+      Map<String, dynamic> _json = json.decode(response.body);
+      String _artistID = _json['results'][0]['artistId'].toString();
+      _id = _artistID;
+      print('ID: $_artistID');
+    });
+    return _id;
   }
 }
