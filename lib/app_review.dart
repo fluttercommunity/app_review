@@ -17,15 +17,16 @@ class AppReview {
     if (Platform.isIOS) {
       String _appID = await getiOSAppID;
       String details = '';
+      String _url = 'itunes.apple.com/app/id$_appID?action=write-review';
       if (await canLaunch("itms-apps://")) {
         print('launching store page');
-        await launch(
-            'itms-apps://itunes.apple.com/app/id$_appID?action=write-review');
-        details = 'Launched App Store Directly';
+        _url = "itms-apps://" + _url;
+        await launch(_url);
+        details = 'Launched App Store Directly: $_url';
       } else {
-        await launch(
-            'https://itunes.apple.com/app/id$_appID?action=write-review');
-        details = 'Launched App Store';
+        _url = "https://" + _url;
+        await launch(_url);
+        details = 'Launched App Store: $_url';
       }
       return details;
     } else {
@@ -59,9 +60,8 @@ class AppReview {
         .get('http://itunes.apple.com/lookup?bundleId=$_appID')
         .then((response) {
       Map<String, dynamic> _json = json.decode(response.body);
-      String _artistID = _json['results'][0]['artistId'].toString();
-      _id = _artistID;
-      print('ID: $_artistID');
+      _id = _json['results'][0]['artistId'].toString();
+      print('Artist ID: $_id');
     });
     return _id;
   }
