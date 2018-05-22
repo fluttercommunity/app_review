@@ -1,3 +1,7 @@
+## [0.0.3] - Bug Fixes
+
+* On Android Returning Wrong App ID
+
 ## [0.0.2] - Bug Fixes
 
 * On iOS it will now open the appstore directly instead of safari first.
