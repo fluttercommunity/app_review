@@ -28,26 +28,6 @@ public class SwiftAppReviewPlugin: NSObject, FlutterPlugin {
                 result("If the app is not published the app will not be found. Prior to iOS 10.3 (Going to Store Page of App): " + appID)
             }
           }
-        case "writeReview":
-          let urlStr = "itms-apps://itunes.apple.com/app/viewContentsUserReviews?id=\(appID)" // Open App Review Tab
-          if let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) {
-              if #available(iOS 10.0, *) {
-                  UIApplication.shared.open(url, options: [:], completionHandler: nil)
-              } else {
-                  UIApplication.shared.openURL(url)
-              }
-          }
-          result("Writing review for: " + appID)
-        case "storeListing":
-          let urlStr = "itms-apps://itunes.apple.com/app/id\(appID)" // Open App Page
-          if let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) {
-              if #available(iOS 10.0, *) {
-                  UIApplication.shared.open(url, options: [:], completionHandler: nil)
-              } else {
-                  UIApplication.shared.openURL(url)
-              }
-          }
-          result("If the app is not published the app will not be found. Opening Store Listing for: " + appID)
         case "getAppID":
           result(appID)
         default:
