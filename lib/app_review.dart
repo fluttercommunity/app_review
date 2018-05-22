@@ -9,15 +9,21 @@ class AppReview {
   static const MethodChannel _channel = const MethodChannel('app_review');
 
   static Future<String> get requestReview async {
-    final String details = await _channel.invokeMethod('requestReview');
-    return details;
+    if (Platform.isIOS) {
+      final String details = await _channel.invokeMethod('requestReview');
+      return details;
+    } else {
+      final String details = await storeListing;
+      return details;
+    }
   }
 
   static Future<String> get writeReview async {
     if (Platform.isIOS) {
       String _appID = await getiOSAppID;
       String details = '';
-      String _url = 'itunes.apple.com/us/app/id$_appID?mt=8&action=write-review';
+      String _url =
+          'itunes.apple.com/us/app/id$_appID?mt=8&action=write-review';
       if (await canLaunch("itms-apps://")) {
         print('launching store page');
         await launch("itms-apps://" + _url);
@@ -28,7 +34,7 @@ class AppReview {
       }
       return details;
     } else {
-      final String details = await _channel.invokeMethod('writeReview');
+      final String details = await storeListing;
       return details;
     }
   }
@@ -37,11 +43,19 @@ class AppReview {
     String details = '';
     if (Platform.isIOS) {
       String _appID = await getiOSAppID;
-      await launch(
-          'https://itunes.apple.com/us/app/id$_appID?');
+      await launch('https://itunes.apple.com/us/app/id$_appID?');
       details = 'Launched App Store';
     } else {
-      details = await _channel.invokeMethod('storeListing');
+      String details = '';
+      String _appID = await getAppID;
+      if (await canLaunch("market://")) {
+        print('launching store page');
+        await launch("market://details?id=" + _appID);
+        details = 'Launched App Store Directly: $_appID';
+      } else {
+        await launch("https://play.google.com/store/apps/details?id=" + _appID);
+        details = 'Launched App Store: $_appID';
+      }
     }
     return details;
   }
@@ -52,7 +66,7 @@ class AppReview {
   }
 
   static Future<String> get getiOSAppID async {
-    final String _appID = await _channel.invokeMethod('getAppID');
+    final String _appID = await getAppID;
     String _id = '';
     await http
         .get('http://itunes.apple.com/lookup?bundleId=$_appID')

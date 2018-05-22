@@ -43,24 +43,10 @@ public class AppReviewPlugin implements MethodCallHandler {
 
   @Override
   public void onMethodCall(MethodCall call, Result result) {
-      appPackageName = BuildConfig.APPLICATION_ID;
-
     String method = call.method;
     switch (method) {
-      case "requestReview":
-          openListing(appPackageName);
-          result.success("If the app is not published the app will not be found. Opening in Google Play: " + appPackageName);
-        break;
-      case "writeReview":
-          openListing(appPackageName);
-          result.success("If the app is not published the app will not be found. Opening in Google Play: " + appPackageName);
-        break;
-      case "storeListing":
-          openListing(appPackageName);
-          result.success("If the app is not published the app will not be found. Opening in Google Play: " + appPackageName);
-        break;
       case "getAppID":
-        result.success("" + appPackageName);
+        result.success("" + BuildConfig.APPLICATION_ID);
         break;
       default:
         result.notImplemented();
@@ -68,13 +54,13 @@ public class AppReviewPlugin implements MethodCallHandler {
     }
   }
 
-    private void openListing(String appID) {
-        Activity activity = registrar.activity();
-        try {
-            activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appID)));
-        } catch (android.content.ActivityNotFoundException anfe) {
-            activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appID)));
-        }
-    }
+    // private void openListing(String appID) {
+    //     Activity activity = registrar.activity();
+    //     try {
+    //         activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appID)));
+    //     } catch (android.content.ActivityNotFoundException anfe) {
+    //         activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appID)));
+    //     }
+    // }
 
 }
