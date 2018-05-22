@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'dart:io';
 import 'dart:convert';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:package_info/package_info.dart';
 
 class AppReview {
   static const MethodChannel _channel = const MethodChannel('app_review');
@@ -61,8 +62,17 @@ class AppReview {
   }
 
   static Future<String> get getAppID async {
-    final String details = await _channel.invokeMethod('getAppID');
-    return details;
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+    String appName = packageInfo.appName;
+    String packageName = packageInfo.packageName;
+    String version = packageInfo.version;
+    String buildNumber = packageInfo.buildNumber;
+
+    print(
+        "App Name: $appName\nPackage Name: $packageName\nVersion: $version\nBuild Number: $buildNumber");
+
+    return packageName;
   }
 
   static Future<String> get getiOSAppID async {

@@ -28,8 +28,6 @@ public class SwiftAppReviewPlugin: NSObject, FlutterPlugin {
                 result("If the app is not published the app will not be found. Prior to iOS 10.3 (Going to Store Page of App): " + appID)
             }
           }
-        case "getAppID":
-          result(appID)
         default:
           result(FlutterMethodNotImplemented)
     }

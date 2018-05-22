@@ -45,9 +45,9 @@ public class AppReviewPlugin implements MethodCallHandler {
   public void onMethodCall(MethodCall call, Result result) {
     String method = call.method;
     switch (method) {
-      case "getAppID":
-        result.success("" + BuildConfig.APPLICATION_ID);
-        break;
+      // case "getAppID":
+      //   result.success("" + BuildConfig.APPLICATION_ID);
+      //   break;
       default:
         result.notImplemented();
         break;
