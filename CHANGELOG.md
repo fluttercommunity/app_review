@@ -1,3 +1,7 @@
+## [0.0.4] - Bug Fixes
+
+* Updating for Latest Flutter Release
+
 ## [0.0.3] - Bug Fixes
 
 * On Android Returning Wrong App ID
