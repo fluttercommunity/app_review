@@ -4,8 +4,8 @@ version: 0.0.3
 author: Rody Davis <rody.davis.jr@gmail.com>
 homepage: https://github.com/AppleEducate/app_review
 environment:
-  sdk: ">=1.19.0 <2.0.0"
-  flutter: "^0.3.1"
+  sdk: ">=1.19.0 <2.2.0"
+  flutter: "^0.4.0"
 
 dependencies:
   http: "^0.11.3+16"
