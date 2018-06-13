@@ -5,12 +5,10 @@
 Flutter Plugin for Requesting and Writing Reviews in Google Play and the App Store. Apps have to be published for the app to be found correctly. Android only supports navigating to Store Listing in Google Play.
 
 ## Installing
+```
+app_review: "^0.0.4"
+```
 
-```
-app_review:
-    git:
-      url: git://github.com/AppleEducate/app_review
-```
 ## Import
 ```
 import 'package:app_review/app_review.dart';
