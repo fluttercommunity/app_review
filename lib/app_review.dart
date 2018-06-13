@@ -47,7 +47,6 @@ class AppReview {
       await launch('https://itunes.apple.com/us/app/id$_appID?');
       details = 'Launched App Store';
     } else {
-      String details = '';
       String _appID = await getAppID;
       if (await canLaunch("market://")) {
         print('launching store page');
