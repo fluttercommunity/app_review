@@ -1,3 +1,7 @@
+## [0.0.5] - Bug Fixes
+
+* Updating for Latest Flutter Release
+
 ## [0.0.4] - Bug Fixes
 
 * Updating for Latest Flutter Release
