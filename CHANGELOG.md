@@ -1,3 +1,7 @@
+## [0.0.6] - Bug Fixes
+
+* Updating README.md
+
 ## [0.0.5] - Bug Fixes
 
 * Updating for Latest Flutter Release
