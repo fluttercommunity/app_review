@@ -1,7 +1,34 @@
 import 'package:app_review/app_review.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(new MyApp());
+import 'dart:io' show Platform;
+import 'package:flutter/foundation.dart';
+
+// The existing imports
+// !! Keep your existing impots here !!
+
+/// main is entry point of Flutter application
+void main() {
+  // Desktop platforms aren't a valid platform.
+  _setTargetPlatformForDesktop();
+
+  return runApp(MyApp());
+}
+
+/// If the current platform is desktop, override the default platform to
+/// a supported platform (iOS for macOS, Android for Linux and Windows).
+/// Otherwise, do nothing.
+void _setTargetPlatformForDesktop() {
+  TargetPlatform targetPlatform;
+  if (Platform.isMacOS) {
+    targetPlatform = TargetPlatform.iOS;
+  } else if (Platform.isLinux || Platform.isWindows) {
+    targetPlatform = TargetPlatform.android;
+  }
+  if (targetPlatform != null) {
+    debugDefaultTargetPlatformOverride = targetPlatform;
+  }
+}
 
 class MyApp extends StatefulWidget {
   @override
@@ -10,9 +37,9 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
-  initState() {
+  void initState() {
     super.initState();
-    AppReview.getAppID.then((onValue) {
+    AppReview.getAppID.then((String onValue) {
       setState(() {
         appID = onValue;
       });
@@ -27,9 +54,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return new MaterialApp(
       home: new Scaffold(
-        appBar: new AppBar(
-          title: new Text('App Review'),
-        ),
+        appBar: new AppBar(title: const Text('App Review')),
         body: new SingleChildScrollView(
           child: new ListBody(
             children: <Widget>[
@@ -37,11 +62,11 @@ class _MyAppState extends State<MyApp> {
                 height: 40.0,
               ),
               new ListTile(
-                leading: new Icon(Icons.info),
-                title: new Text('App ID'),
+                leading: const Icon(Icons.info),
+                title: const Text('App ID'),
                 subtitle: new Text(appID),
-                  onTap: () {
-                  AppReview.getAppID.then((onValue) {
+                onTap: () {
+                  AppReview.getAppID.then((String onValue) {
                     setState(() {
                       output = onValue;
                     });
@@ -49,16 +74,14 @@ class _MyAppState extends State<MyApp> {
                   });
                 },
               ),
-              new Divider(
-                height: 20.0,
-              ),
+              const Divider(height: 20.0),
               new ListTile(
-                leading: new Icon(
+                leading: const Icon(
                   Icons.shop,
                 ),
-                title: new Text('View Store Page'),
+                title: const Text('View Store Page'),
                 onTap: () {
-                  AppReview.storeListing.then((onValue) {
+                  AppReview.storeListing.then((String onValue) {
                     setState(() {
                       output = onValue;
                     });
@@ -66,16 +89,14 @@ class _MyAppState extends State<MyApp> {
                   });
                 },
               ),
-              new Divider(
-                height: 20.0,
-              ),
+              const Divider(height: 20.0),
               new ListTile(
-                leading: new Icon(
+                leading: const Icon(
                   Icons.star,
                 ),
-                title: new Text('Request Review'),
+                title: const Text('Request Review'),
                 onTap: () {
-                  AppReview.requestReview.then((onValue) {
+                  AppReview.requestReview.then((String onValue) {
                     setState(() {
                       output = onValue;
                     });
@@ -83,16 +104,14 @@ class _MyAppState extends State<MyApp> {
                   });
                 },
               ),
-              new Divider(
-                height: 20.0,
-              ),
+              const Divider(height: 20.0),
               new ListTile(
-                leading: new Icon(
+                leading: const Icon(
                   Icons.note_add,
                 ),
-                title: new Text('Write a New Review'),
+                title: const Text('Write a New Review'),
                 onTap: () {
-                  AppReview.writeReview.then((onValue) {
+                  AppReview.writeReview.then((String onValue) {
                     setState(() {
                       output = onValue;
                     });
@@ -100,12 +119,8 @@ class _MyAppState extends State<MyApp> {
                   });
                 },
               ),
-              new Divider(
-                height: 20.0,
-              ),
-              new ListTile(
-                title: new Text(output),
-              ),
+              const Divider(height: 20.0),
+              new ListTile(title: new Text(output)),
             ],
           ),
         ),

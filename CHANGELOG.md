@@ -1,3 +1,27 @@
+## 1.0.0 - 04.29.2019
+
+* Supporting Android SDK 16
+
+## 0.1.1 - 04.06.2019
+
+* Making Example able to Run on the Desktop
+
+## [0.1.0]
+
+* Migration to AndroidX
+
+## [0.0.9] - Bug Fix
+
+* Updating Swift Version
+
+## [0.0.8] - Bug Fix
+
+* Latest Flutter Fix
+
+## [0.0.7] - Support
+
+* Updating Example
+
 ## [0.0.6] - Bug Fixes
 
 * Updating README.md
