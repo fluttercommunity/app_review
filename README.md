@@ -20,7 +20,7 @@ In debug mode it will always display.
 
 This is the required way for requesting reviews after iOS 10.3.
 
-```
+``` dart
 import 'dart:io';
 import 'package:app_review/app_review.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +38,7 @@ import 'package:flutter/material.dart';
 
 ## Example
 
-```
+``` dart
 import 'package:app_review/app_review.dart';
 import 'package:flutter/material.dart';
 
