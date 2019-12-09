@@ -10,6 +10,12 @@ import 'package:url_launcher/url_launcher.dart';
 class AppReview {
   static const MethodChannel _channel = MethodChannel('app_review');
 
+  /// Request review.
+  ///
+  /// Tells StoreKit to ask the user to rate or review your app, if appropriate.
+  /// Supported only in iOS 10.3+.
+  ///
+  /// Returns string with details message.
   static Future<String> get requestReview async {
     if (Platform.isIOS) {
       final String details = await _channel.invokeMethod('requestReview');
@@ -20,6 +26,9 @@ class AppReview {
     }
   }
 
+  /// Open store page with action write review.
+  ///
+  /// Supported only for iOS, on Android [storeListing] will be executed.
   static Future<String> get writeReview async {
     if (Platform.isIOS) {
       final String _appID = await getiOSAppID;
@@ -41,6 +50,9 @@ class AppReview {
     }
   }
 
+  /// Navigates to Store Listing in Google Play/App Store.
+  ///
+  /// Returns string with details message.
   static Future<String> get storeListing async {
     String details = '';
     if (Platform.isIOS) {
@@ -65,6 +77,7 @@ class AppReview {
     return details;
   }
 
+  /// Returns package name for application.
   static Future<String> get getAppID async {
     final PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
@@ -79,6 +92,9 @@ class AppReview {
     return packageName;
   }
 
+  /// Returns Apple ID for iOS application.
+  ///
+  /// If there is no such application in App Store - returns empty string.
   static Future<String> get getiOSAppID async {
     final String _appID = await getAppID;
     String _id = '';
