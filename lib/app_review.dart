@@ -82,8 +82,12 @@ class AppReview {
         .get('http://itunes.apple.com/lookup?bundleId=$_appID')
         .then((dynamic response) {
       final Map<String, dynamic> _json = json.decode(response.body);
-      _id = _json['results'][0]['trackId'].toString();
-      print('Track ID: $_id');
+      if (_json['resultCount'] > 0) {
+        _id = _json['results'][0]['trackId'].toString();
+        print('Track ID: $_id');
+      } else {
+        print('Application with bundle "$_appID" is not found on App Store');
+      }
     });
     return _id;
   }
