@@ -23,10 +23,8 @@ public class SwiftAppReviewPlugin: NSObject, FlutterPlugin {
             result("Later than iOS 10.3 the App will Request the App Review, Users can turn this off in settings for all apps, Apple will manage when to request the review from the user. In Debug it will always show. Requesting review for: " + appID)
           } else {
             // Fallback on earlier versions
-            let urlStr = "itms-apps://itunes.apple.com/app/viewContentsUserReviews?id=\(appID)" // Open App Review Tab
-            if let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) {
-                result("If the app is not published the app will not be found. Prior to iOS 10.3 (Going to Store Page of App): " + appID)
-            }
+            result("Prior to iOS 10.3 App Review from App is not available. You should go to Store Page of App: " + appID + ". If the app is not published the app will not be found.")
+          }
         case "isRequestReviewAvailable":
           if #available(iOS 10.3, *) {
             result("1")
