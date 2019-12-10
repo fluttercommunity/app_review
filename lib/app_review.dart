@@ -13,7 +13,7 @@ class AppReview {
   /// Request review.
   ///
   /// Tells StoreKit to ask the user to rate or review your app, if appropriate.
-  /// Supported only in iOS 10.3+.
+  /// Supported only in iOS 10.3+ (see [isRequestReviewAvailable]).
   ///
   /// Returns string with details message.
   static Future<String> get requestReview async {
@@ -23,6 +23,16 @@ class AppReview {
     } else {
       final String details = await storeListing;
       return details;
+    }
+  }
+
+  /// Check if [requestReview] feature available.
+  static Future<bool> get isRequestReviewAvailable async {
+    if (Platform.isIOS) {
+      final String result = await _channel.invokeMethod('isRequestReviewAvailable');
+      return result == "1";
+    } else {
+      return false;
     }
   }
 

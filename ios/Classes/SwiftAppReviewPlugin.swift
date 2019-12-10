@@ -27,6 +27,11 @@ public class SwiftAppReviewPlugin: NSObject, FlutterPlugin {
             if let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) {
                 result("If the app is not published the app will not be found. Prior to iOS 10.3 (Going to Store Page of App): " + appID)
             }
+        case "isRequestReviewAvailable":
+          if #available(iOS 10.3, *) {
+            result("1")
+          } else {
+            result("0")
           }
         default:
           result(FlutterMethodNotImplemented)
