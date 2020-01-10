@@ -1,22 +1,46 @@
 PODS:
-  - app_review (0.0.1):
+  - app_review (1.0.1):
     - Flutter
   - Flutter (1.0.0)
+  - package_info (0.0.1):
+    - Flutter
+  - url_launcher (0.0.1):
+    - Flutter
+  - url_launcher_macos (0.0.1):
+    - Flutter
+  - url_launcher_web (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
-  - app_review (from `Pods/.symlinks/plugins/app_review/ios`)
-  - Flutter (from `Pods/.symlinks/flutter/ios`)
+  - app_review (from `.symlinks/plugins/app_review/ios`)
+  - Flutter (from `Flutter`)
+  - package_info (from `.symlinks/plugins/package_info/ios`)
+  - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
+  - url_launcher_macos (from `.symlinks/plugins/url_launcher_macos/ios`)
+  - url_launcher_web (from `.symlinks/plugins/url_launcher_web/ios`)
 
 EXTERNAL SOURCES:
   app_review:
-    :path: Pods/.symlinks/plugins/app_review/ios
+    :path: ".symlinks/plugins/app_review/ios"
   Flutter:
-    :path: Pods/.symlinks/flutter/ios
+    :path: Flutter
+  package_info:
+    :path: ".symlinks/plugins/package_info/ios"
+  url_launcher:
+    :path: ".symlinks/plugins/url_launcher/ios"
+  url_launcher_macos:
+    :path: ".symlinks/plugins/url_launcher_macos/ios"
+  url_launcher_web:
+    :path: ".symlinks/plugins/url_launcher_web/ios"
 
 SPEC CHECKSUMS:
-  app_review: 017f0ac7e570c624a9c763b2b0f4d4afdb6c8a00
-  Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
+  app_review: 1253f9c1408e4a9708abbcb28bbea969017b2f81
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  package_info: 48b108e75b8802c2d5e126f208ef540561c98aef
+  url_launcher: a1c0cc845906122c4784c542523d8cacbded5626
+  url_launcher_macos: fd7894421cd39320dce5f292fc99ea9270b2a313
+  url_launcher_web: e5527357f037c87560776e36436bf2b0288b965c
 
-PODFILE CHECKSUM: b9151fabb7ec714b9649988fd2d18726a6dc9ce3
+PODFILE CHECKSUM: c319f28f01c1c7fe13538b155b72375b648356a1
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.8.4
