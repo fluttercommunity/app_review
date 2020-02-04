@@ -10,6 +10,12 @@ import 'package:url_launcher/url_launcher.dart';
 class AppReview {
   static const MethodChannel _channel = MethodChannel('app_review');
 
+  /// Request review.
+  ///
+  /// Tells StoreKit to ask the user to rate or review your app, if appropriate.
+  /// Supported only in iOS 10.3+ (see [isRequestReviewAvailable]).
+  ///
+  /// Returns string with details message.
   static Future<String> get requestReview async {
     if (Platform.isIOS) {
       final String details = await _channel.invokeMethod('requestReview');
@@ -20,6 +26,19 @@ class AppReview {
     }
   }
 
+  /// Check if [requestReview] feature available.
+  static Future<bool> get isRequestReviewAvailable async {
+    if (Platform.isIOS) {
+      final String result = await _channel.invokeMethod('isRequestReviewAvailable');
+      return result == "1";
+    } else {
+      return false;
+    }
+  }
+
+  /// Open store page with action write review.
+  ///
+  /// Supported only for iOS, on Android [storeListing] will be executed.
   static Future<String> get writeReview async {
     if (Platform.isIOS) {
       final String _appID = await getiOSAppID;
@@ -41,12 +60,19 @@ class AppReview {
     }
   }
 
+  /// Navigates to Store Listing in Google Play/App Store.
+  ///
+  /// Returns string with details message.
   static Future<String> get storeListing async {
     String details = '';
     if (Platform.isIOS) {
       final String _appID = await getiOSAppID;
-      await launch('https://itunes.apple.com/app/id$_appID?');
-      details = 'Launched App Store';
+    if (_appID.isNotEmpty) {
+        await launch('https://itunes.apple.com/app/id$_appID?');
+        details = 'Launched App Store';
+      } else {
+        details = 'Not found in App Store';
+      }
     } else {
       final String _appID = await getAppID;
       if (await canLaunch("market://")) {
@@ -61,6 +87,7 @@ class AppReview {
     return details;
   }
 
+  /// Returns package name for application.
   static Future<String> get getAppID async {
     final PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
@@ -75,6 +102,9 @@ class AppReview {
     return packageName;
   }
 
+  /// Returns Apple ID for iOS application.
+  ///
+  /// If there is no such application in App Store - returns empty string.
   static Future<String> get getiOSAppID async {
     final String _appID = await getAppID;
     String _id = '';
@@ -82,8 +112,12 @@ class AppReview {
         .get('http://itunes.apple.com/lookup?bundleId=$_appID')
         .then((dynamic response) {
       final Map<String, dynamic> _json = json.decode(response.body);
-      _id = _json['results'][0]['trackId'].toString();
-      print('Track ID: $_id');
+      if (_json['resultCount'] > 0) {
+        _id = _json['results'][0]['trackId'].toString();
+        print('Track ID: $_id');
+      } else {
+        print('Application with bundle "$_appID" is not found on App Store');
+      }
     });
     return _id;
   }
