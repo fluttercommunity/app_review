@@ -44,7 +44,7 @@ class AppReview {
       final String _appID = await getiOSAppID;
       String details = '';
       final String _url =
-          'itunes.apple.com/us/app/id$_appID?mt=8&action=write-review';
+          'itunes.apple.com/app/id$_appID?mt=8&action=write-review';
       if (await canLaunch("itms-apps://")) {
         print('launching store page');
         await launch("itms-apps://" + _url);
@@ -67,8 +67,8 @@ class AppReview {
     String details = '';
     if (Platform.isIOS) {
       final String _appID = await getiOSAppID;
-      if (_appID.isNotEmpty) {
-        await launch('https://itunes.apple.com/us/app/id$_appID?');
+    if (_appID.isNotEmpty) {
+        await launch('https://itunes.apple.com/app/id$_appID?');
         details = 'Launched App Store';
       } else {
         details = 'Not found in App Store';

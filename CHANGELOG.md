@@ -1,3 +1,7 @@
+## 1.0.1
+
+* Updating version
+
 ## 1.0.0 - 04.29.2019
 
 * Supporting Android SDK 16
