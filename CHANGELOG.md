@@ -1,3 +1,8 @@
+## 1.1.0
+
+* Merging PRs
+* Bumping Version
+
 ## 1.0.1
 
 * Updating version
