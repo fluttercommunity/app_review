@@ -4,7 +4,10 @@
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WSH3GVC49GNNJ)
 
 # app_review
-![alt text](https://github.com/AppleEducate/app_review/blob/master/screenshots/IMG_0024.PNG)
+
+![alt text](https://github.com/fluttercommunity/app_review/blob/master/screenshots/IMG_0024.PNG)
+
+Online Demo: https://fluttercommunity.github.io/app_review/
 
 ## Description
 Flutter Plugin for Requesting and Writing Reviews in Google Play and the App Store. Apps have to be published for the app to be found correctly. Android only supports navigating to Store Listing in Google Play.
