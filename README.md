@@ -20,11 +20,9 @@ It's important to note that the App ID must match the App ID in Google Play and 
 Navigates to Store Listing in Google Play
 
 #### iOS
-For Requesting Reviews it is managed by Apple. You can call the code on the page load and if the user has "rate in apps" turned on Apple will send the request for the review pop up. 
+iOS manages the pop-up requesting review within an app. You can call the code through `AppReview.requestReview` and if the user has "rate in apps" turned on, iOS will send "the request for the review" pop up. This is the required way for requesting reviews after iOS 10.3.
 
-In debug mode it will always display. 
-
-This is the required way for requesting reviews after iOS 10.3.
+In debug mode it will always display. In apps through TestFlight, the `AppReview.requestReview` does nothing.
 
 ``` dart
 import 'dart:io';
