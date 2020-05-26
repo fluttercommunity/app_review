@@ -8,6 +8,7 @@ import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AppReview {
+  static const Duration kDefaultDuration = Duration(minutes: 5);
   static const MethodChannel _channel = MethodChannel('app_review');
 
   /// Request review.
@@ -26,10 +27,23 @@ class AppReview {
     }
   }
 
+  /// Request review.
+  ///
+  /// Tells StoreKit to ask the user to rate or review your app, if appropriate.
+  /// Supported only in iOS 10.3+ (see [isRequestReviewAvailable]).
+  ///
+  /// Returns string with details message.
+  static Future<Timer> requestReviewDelayed(
+      [Duration duration = kDefaultDuration]) async {
+    final Timer _timer = Timer(duration, () => requestReview);
+    return _timer;
+  }
+
   /// Check if [requestReview] feature available.
   static Future<bool> get isRequestReviewAvailable async {
     if (Platform.isIOS) {
-      final String result = await _channel.invokeMethod('isRequestReviewAvailable');
+      final String result =
+          await _channel.invokeMethod('isRequestReviewAvailable');
       return result == "1";
     } else {
       return false;
@@ -67,7 +81,7 @@ class AppReview {
     String details = '';
     if (Platform.isIOS) {
       final String _appID = await getiOSAppID;
-    if (_appID.isNotEmpty) {
+      if (_appID.isNotEmpty) {
         await launch('https://itunes.apple.com/app/id$_appID?');
         details = 'Launched App Store';
       } else {

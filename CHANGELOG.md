@@ -1,3 +1,8 @@
+## 1.1.2
+
+* Updates to plugin
+* Adding Delayed Review
+
 ## 1.1.1
 
 * Prepare for 1.0.0 version of sensors and package_info. ([dart_lsc](http://github.com/amirh/dart_lsc))

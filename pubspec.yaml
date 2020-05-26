@@ -1,6 +1,6 @@
 name: app_review
 description: Request and Write Reviews and Open Store Listing for Android and iOS in Flutter.
-version: 1.1.1
+version: 1.1.2
 author: Rody Davis <rody.davis.jr@gmail.com>
 maintainer: Rody Davis (@rodydavis)
 homepage: https://github.com/fluttercommunity/app_review
