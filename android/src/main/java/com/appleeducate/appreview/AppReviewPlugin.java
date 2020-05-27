@@ -3,6 +3,7 @@ package com.appleeducate.appreview;
 import androidx.annotation.NonNull;
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
+import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
@@ -11,11 +12,15 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 /** AppReviewPlugin */
 public class AppReviewPlugin implements FlutterPlugin, MethodCallHandler {
+  private static final String CHANNEL_NAME = "app_review";
+
   /** Plugin registration. */
   private Registrar registrar;
 
   private Result result;
   String appPackageName = "";
+
+  private MethodChannel channel;
 
   public AppReviewPlugin() {
   }
@@ -26,18 +31,29 @@ public class AppReviewPlugin implements FlutterPlugin, MethodCallHandler {
 
   /** Plugin registration. */
   public static void registerWith(Registrar registrar) {
-    final MethodChannel channel = new MethodChannel(registrar.messenger(), "app_review");
     AppReviewPlugin simplePermissionsPlugin = new AppReviewPlugin(registrar);
-    channel.setMethodCallHandler(simplePermissionsPlugin);
+    simplePermissionsPlugin.setupChannel(registrar.messenger());
     //    registrar.addRequestPermissionsResultListener(simplePermissionsPlugin);
   }
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
+    setupChannel(binding.getBinaryMessenger());
   }
 
   @Override
   public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
+    teardownChannel();
+  }
+
+  private void setupChannel(BinaryMessenger messenger) {
+    channel = new MethodChannel(messenger, CHANNEL_NAME);
+    channel.setMethodCallHandler(this);
+  }
+
+  private void teardownChannel() {
+    channel.setMethodCallHandler(null);
+    channel = null;
   }
 
   @Override
