@@ -13,12 +13,12 @@ class AppReview {
 
   /// Request review.
   ///
-  /// Tells StoreKit to ask the user to rate or review your app, if appropriate.
-  /// Supported only in iOS 10.3+ (see [isRequestReviewAvailable]).
+  /// Tells StoreKit / Play Store to ask the user to rate or review your app, if appropriate.
+  /// Supported only in iOS 10.3+ and Android with Play Services installed (see [isRequestReviewAvailable]).
   ///
   /// Returns string with details message.
   static Future<String> get requestReview async {
-    if (Platform.isIOS) {
+    if (Platform.isIOS || Platform.isAndroid) {
       final String details = await _channel.invokeMethod('requestReview');
       return details;
     } else {
@@ -30,20 +30,18 @@ class AppReview {
   /// Request review.
   ///
   /// Tells StoreKit to ask the user to rate or review your app, if appropriate.
-  /// Supported only in iOS 10.3+ (see [isRequestReviewAvailable]).
+  /// Supported only in iOS 10.3+ and Android with Play Services installed (see [isRequestReviewAvailable]).
   ///
   /// Returns string with details message.
-  static Future<Timer> requestReviewDelayed(
-      [Duration duration = kDefaultDuration]) async {
+  static Future<Timer> requestReviewDelayed([Duration duration = kDefaultDuration]) async {
     final Timer _timer = Timer(duration, () => requestReview);
     return _timer;
   }
 
   /// Check if [requestReview] feature available.
   static Future<bool> get isRequestReviewAvailable async {
-    if (Platform.isIOS) {
-      final String result =
-          await _channel.invokeMethod('isRequestReviewAvailable');
+    if (Platform.isIOS || Platform.isAndroid) {
+      final String result = await _channel.invokeMethod('isRequestReviewAvailable');
       return result == "1";
     } else {
       return false;
@@ -57,8 +55,7 @@ class AppReview {
     if (Platform.isIOS) {
       final String _appID = await getiOSAppID;
       String details = '';
-      final String _url =
-          'itunes.apple.com/app/id$_appID?mt=8&action=write-review';
+      final String _url = 'itunes.apple.com/app/id$_appID?mt=8&action=write-review';
       if (await canLaunch("itms-apps://")) {
         print('launching store page');
         await launch("itms-apps://" + _url);
@@ -110,8 +107,7 @@ class AppReview {
     final String version = packageInfo.version;
     final String buildNumber = packageInfo.buildNumber;
 
-    print(
-        "App Name: $appName\nPackage Name: $packageName\nVersion: $version\nBuild Number: $buildNumber");
+    print("App Name: $appName\nPackage Name: $packageName\nVersion: $version\nBuild Number: $buildNumber");
 
     return packageName;
   }
@@ -122,9 +118,7 @@ class AppReview {
   static Future<String> get getiOSAppID async {
     final String _appID = await getAppID;
     String _id = '';
-    await http
-        .get('http://itunes.apple.com/lookup?bundleId=$_appID')
-        .then((dynamic response) {
+    await http.get('http://itunes.apple.com/lookup?bundleId=$_appID').then((dynamic response) {
       final Map<String, dynamic> _json = json.decode(response.body);
       if (_json['resultCount'] > 0) {
         _id = _json['results'][0]['trackId'].toString();

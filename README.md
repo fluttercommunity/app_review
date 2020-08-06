@@ -12,13 +12,13 @@
 Online Demo: https://fluttercommunity.github.io/app_review/
 
 ## Description
-Flutter Plugin for Requesting and Writing Reviews in Google Play and the App Store. Apps have to be published for the app to be found correctly. Android only supports navigating to Store Listing in Google Play.
+Flutter Plugin for Requesting and Writing Reviews in Google Play and the App Store. Apps have to be published for the app to be found correctly.
 
 ## How To Use
 It's important to note that the App ID must match the App ID in Google Play and iTunes Connect. This can be changed in the Info.plist on iOS and app/build.gradle on Android. You will use this App ID for other services like Firebase, Admob and publishing the app. 
 
 #### Android
-Navigates to Store Listing in Google Play
+Opens In App Review but only if Play Services are installed on the device and the App is downloaded through the Play Store. Check out the [![official documentation](https://developer.android.com/guide/playcore/in-app-review)].
 
 #### iOS
 iOS manages the pop-up requesting review within an app. You can call the code through `AppReview.requestReview` and if the user has "rate in apps" turned on, iOS will send "the request for the review" pop up. This is the required way for requesting reviews after iOS 10.3.
