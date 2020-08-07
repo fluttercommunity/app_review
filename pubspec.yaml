@@ -7,6 +7,7 @@ homepage: https://github.com/fluttercommunity/app_review
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
+  flutter: ^1.10.0
 
 dependencies:
   http: ">=0.12.2 <2.0.0"
@@ -21,5 +22,11 @@ dependencies:
 # The following section is specific to Flutter.
 flutter:
   plugin:
-    androidPackage: com.appleeducate.appreview
-    pluginClass: AppReviewPlugin
+    platforms:
+      android:
+        package: com.appleeducate.appreview
+        pluginClass: AppReviewPlugin
+      ios:
+        pluginClass: AppReviewPlugin
+      # macos:
+      #   pluginClass: AppReviewPlugin
