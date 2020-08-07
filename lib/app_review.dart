@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
 import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:http/http.dart' as http;
 
 class AppReview {
   static const Duration kDefaultDuration = Duration(minutes: 5);
@@ -47,21 +47,20 @@ class AppReview {
   /// Supported only in iOS 10.3+ and Android with Play Services installed (see [isRequestReviewAvailable]).
   ///
   /// Returns string with details message.
-  static Future<Timer> requestReviewDelayed(
-      [Duration duration = kDefaultDuration]) async {
-    final Timer _timer = Timer(duration, () => requestReview);
-    return _timer;
-  }
+  static Future<Timer> requestReviewDelayed([Duration duration]) async =>
+      Timer(duration ?? kDefaultDuration, () => requestReview);
 
   /// Check if [requestReview] feature available.
   static Future<bool> get isRequestReviewAvailable async {
     if (Platform.isIOS || Platform.isAndroid) {
-      final String result =
-          await _channel.invokeMethod('isRequestReviewAvailable');
-      return result == "1";
-    } else {
-      return false;
+      try {
+        final result =
+            await _channel.invokeMethod<String>('isRequestReviewAvailable');
+        return result == '1';
+      } finally {}
     }
+
+    return false;
   }
 
   /// Open store page with action write review.
@@ -109,11 +108,13 @@ class AppReview {
       _appCountry = code.isEmpty ? null : code;
 
   /// Require app review for iOS
-  static Future<String> openIosReview({bool compose = false}) async {
+  static Future<String> openIosReview({
+    String appId,
+    bool compose = false,
+  }) async {
     if (compose) {
-      final appId = await getIosAppId() ?? '';
-      final reviewUrl =
-          'itunes.apple.com/app/id$appId?mt=8&action=write-review';
+      final id = appId ?? (await getIosAppId()) ?? '';
+      final reviewUrl = 'itunes.apple.com/app/id$id?mt=8&action=write-review';
 
       if (await canLaunch('itms-apps://$reviewUrl')) {
         print('launching store page');
@@ -133,8 +134,8 @@ class AppReview {
   /// Require app review for Android
   static Future<String> openAndroidReview() {
     try {
-      return _channel.invokeMethod('requestReview');
-    } catch (e) {
+      return _channel.invokeMethod<String>('requestReview');
+    } on dynamic {
       return openGooglePlay();
     }
   }
@@ -176,43 +177,61 @@ class AppReview {
     return 'Launched Google Play: $bundle';
   }
 
+  /// Lazyload package info instance
+  static Future<PackageInfo> getPackageInfo() async {
+    _packageInfo ??= await PackageInfo.fromPlatform();
+
+    print('App Name: ${_packageInfo.appName}\n'
+        'Package Name: ${_packageInfo.packageName}\n'
+        'Version: ${_packageInfo.version}\n'
+        'Build Number: ${_packageInfo.buildNumber}');
+
+    return _packageInfo;
+  }
+
   /// Get app bundle name
   static Future<String> getBundleName() async {
-    if (_appBundle == null) {
-      _packageInfo ??= await PackageInfo.fromPlatform();
-      _appBundle ??= _packageInfo?.packageName ?? '';
-
-      print('App Name: ${_packageInfo.appName}\n'
-          'Package Name: ${_packageInfo.packageName}\n'
-          'Version: ${_packageInfo.version}\n'
-          'Build Number: ${_packageInfo.buildNumber}');
-    }
-
-    // return _appBundle;
-    return 'net.webike.app01';
+    _appBundle ??= (await getPackageInfo())?.packageName ?? '';
+    return _appBundle;
   }
 
   /// Get app's AppStore ID (public app only)
-  static Future<String> getIosAppId({String countryCode}) async {
-    if (_appId == null) {
-      final String bundleId = await getBundleName();
-      final String country = countryCode ?? _appCountry ?? '';
+  static Future<String> getIosAppId({
+    String countryCode,
+    String bundleId,
+  }) async {
+    // If bundle name is not provided
+    // then fetch and return the app ID from cache (if available)
+    if (bundleId == null) {
+      _appId ??= await getIosAppId(
+        bundleId: await getBundleName(),
+        countryCode: countryCode,
+      );
 
+      return _appId;
+    }
+
+    // Else fetch from AppStore
+    final String id = bundleId ?? (await getBundleName());
+    final String country = countryCode ?? _appCountry ?? '';
+    String appId;
+
+    if (id.isNotEmpty) {
       try {
         final result = await http
-            .get('http://itunes.apple.com/$country/lookup?bundleId=$bundleId')
+            .get('http://itunes.apple.com/$country/lookup?bundleId=$id')
             .timeout(const Duration(seconds: 5));
         final Map json = jsonDecode(result.body ?? '');
-        _appId = json['results'][0]['trackId']?.toString();
+        appId = json['results'][0]['trackId']?.toString();
       } finally {
-        if (_appId?.isNotEmpty == true) {
-          print('Track ID: $_appId');
+        if (appId?.isNotEmpty == true) {
+          print('Track ID: $appId');
         } else {
-          print('Application with bundle $bundleId is not found on App Store');
+          print('Application with bundle $id is not found on App Store');
         }
       }
     }
 
-    return _appId ?? '';
+    return appId ?? '';
   }
 }
