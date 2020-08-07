@@ -3,13 +3,13 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;
 import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
 
 class AppReview {
-  static const MethodChannel _channel = MethodChannel('app_review');
   static const Duration kDefaultDuration = Duration(minutes: 5);
+  static const MethodChannel _channel = MethodChannel('app_review');
 
   //----------------------------------------------------------------------------
   // Maintain original interface
@@ -49,19 +49,6 @@ class AppReview {
   /// Returns string with details message.
   static Future<Timer> requestReviewDelayed([Duration duration]) async =>
       Timer(duration ?? kDefaultDuration, () => requestReview);
-
-  /// Check if [requestReview] feature available.
-  static Future<bool> get isRequestReviewAvailable async {
-    if (Platform.isIOS) {
-      try {
-        final result =
-            await _channel.invokeMethod<String>('isRequestReviewAvailable');
-        return result == '1';
-      } finally {}
-    }
-
-    return false;
-  }
 
   /// Open store page with action write review.
   ///
@@ -207,5 +194,18 @@ class AppReview {
     }
 
     return _appId ?? '';
+  }
+
+  // ========================== //
+
+  /// Check if [requestReview] feature available.
+  static Future<bool> get isRequestReviewAvailable async {
+    if (Platform.isIOS || Platform.isAndroid) {
+      final String result =
+          await _channel.invokeMethod('isRequestReviewAvailable');
+      return result == "1";
+    } else {
+      return false;
+    }
   }
 }
