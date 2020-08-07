@@ -25,8 +25,8 @@ class AppReview {
 
   /// Request review.
   ///
-  /// Tells StoreKit to ask the user to rate or review your app, if appropriate.
-  /// Supported only in iOS 10.3+ (see [isRequestReviewAvailable]).
+  /// Tells StoreKit / Play Store to ask the user to rate or review your app, if appropriate.
+  /// Supported only in iOS 10.3+ and Android with Play Services installed (see [isRequestReviewAvailable]).
   ///
   /// Returns string with details message.
   static Future<String> get requestReview async {
@@ -44,11 +44,23 @@ class AppReview {
   /// Request review.
   ///
   /// Tells StoreKit to ask the user to rate or review your app, if appropriate.
-  /// Supported only in iOS 10.3+ (see [isRequestReviewAvailable]).
+  /// Supported only in iOS 10.3+ and Android with Play Services installed (see [isRequestReviewAvailable]).
   ///
   /// Returns string with details message.
-  static Future<Timer> requestReviewDelayed([Duration duration]) async =>
-      Timer(duration ?? kDefaultDuration, () => requestReview);
+  static Future<Timer> requestReviewDelayed([Duration duration = kDefaultDuration]) async {
+    final Timer _timer = Timer(duration, () => requestReview);
+    return _timer;
+  }
+
+  /// Check if [requestReview] feature available.
+  static Future<bool> get isRequestReviewAvailable async {
+    if (Platform.isIOS || Platform.isAndroid) {
+      final String result = await _channel.invokeMethod('isRequestReviewAvailable');
+      return result == "1";
+    } else {
+      return false;
+    }
+  }
 
   /// Open store page with action write review.
   ///
@@ -193,13 +205,12 @@ class AppReview {
         } else {
           print('Application with bundle $bundleId is not found on App Store');
         }
+
       }
     }
 
     return _appId ?? '';
   }
-
-  // ========================== //
 
   /// Check if [requestReview] feature available.
   static Future<bool> get isRequestReviewAvailable async {
