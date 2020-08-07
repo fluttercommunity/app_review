@@ -161,3 +161,15 @@ class _MyAppState extends State<MyApp> {
 }
 
 ```
+
+## What is onValue value?
+
+Just a sanity check to make sure there were no errors.
+
+### Android
+
+You could store a timestamp to know when to call again.
+
+### iOS
+
+It doesnt really matter.
