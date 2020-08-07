@@ -117,7 +117,10 @@ class AppReview {
   }
 
   /// Require app review for Android
-  static Future<String> openAndroidReview() => openGooglePlay();
+  static Future<String> openAndroidReview() {
+    return _channel.invokeMethod('requestReview');
+    return openGooglePlay();
+  }
 
   /// Open in AppStore
   static Future<String> openAppStore({String fallbackUrl}) async {
