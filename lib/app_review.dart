@@ -47,7 +47,8 @@ class AppReview {
   /// Supported only in iOS 10.3+ and Android with Play Services installed (see [isRequestReviewAvailable]).
   ///
   /// Returns string with details message.
-  static Future<Timer> requestReviewDelayed([Duration duration = kDefaultDuration]) async {
+  static Future<Timer> requestReviewDelayed(
+      [Duration duration = kDefaultDuration]) async {
     final Timer _timer = Timer(duration, () => requestReview);
     return _timer;
   }
@@ -55,7 +56,8 @@ class AppReview {
   /// Check if [requestReview] feature available.
   static Future<bool> get isRequestReviewAvailable async {
     if (Platform.isIOS || Platform.isAndroid) {
-      final String result = await _channel.invokeMethod('isRequestReviewAvailable');
+      final String result =
+          await _channel.invokeMethod('isRequestReviewAvailable');
       return result == "1";
     } else {
       return false;
@@ -130,8 +132,11 @@ class AppReview {
 
   /// Require app review for Android
   static Future<String> openAndroidReview() {
-    return _channel.invokeMethod('requestReview');
-    return openGooglePlay();
+    try {
+      return _channel.invokeMethod('requestReview');
+    } catch (e) {
+      return openGooglePlay();
+    }
   }
 
   /// Open in AppStore
@@ -205,21 +210,9 @@ class AppReview {
         } else {
           print('Application with bundle $bundleId is not found on App Store');
         }
-
       }
     }
 
     return _appId ?? '';
-  }
-
-  /// Check if [requestReview] feature available.
-  static Future<bool> get isRequestReviewAvailable async {
-    if (Platform.isIOS || Platform.isAndroid) {
-      final String result =
-          await _channel.invokeMethod('isRequestReviewAvailable');
-      return result == "1";
-    } else {
-      return false;
-    }
   }
 }
