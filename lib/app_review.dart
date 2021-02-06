@@ -212,7 +212,7 @@ class AppReview {
     }
 
     // Else fetch from AppStore
-    final String id = bundleId ?? (await (getBundleName() as FutureOr<String>));
+    final String id = bundleId;
     final String country = countryCode ?? _appCountry ?? '';
     String? appId;
 
@@ -222,7 +222,7 @@ class AppReview {
             .get(Uri.parse(
                 'http://itunes.apple.com/$country/lookup?bundleId=$id'))
             .timeout(const Duration(seconds: 5));
-        final Map json = jsonDecode(result.body ?? '');
+        final Map json = jsonDecode(result.body);
         appId = json['results'][0]['trackId']?.toString();
       } finally {
         if (appId?.isNotEmpty == true) {
