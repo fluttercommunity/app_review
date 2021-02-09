@@ -3,7 +3,8 @@ description: Request and Write Reviews and Open Store Listing for Android and iO
 version: 2.1.0-nullsafety
 author: Rody Davis <rody.davis.jr@gmail.com>
 maintainer: Rody Davis (@rodydavis)
-homepage: https://github.com/fluttercommunity/app_review
+homepage: https://github.com/rodydavis/plugins
+issue_tracker: https://github.com/fluttercommunity/app_review
 
 environment:
   sdk: '>=2.12.0-259.8.beta <3.0.0'
