@@ -15233,8 +15233,7 @@ s=15
 return P.Z(G.ajT(P.nD("http://itunes.apple.com/"+H.c(l)+"/lookup?bundleId="+H.c(m))).wF(0,C.ol),$async$jE)
 case 15:j=d
 h=j
-h=B.ajN(U.ai3(h.e).c.a.i(0,"charset")).cs(0,h.x)
-i=C.bg.CN(0,h,null)
+i=C.bg.CN(0,B.ajN(U.ai3(h.e).c.a.i(0,"charset")).cs(0,h.x),null)
 h=J.aQ(J.aQ(J.aQ(i,"results"),0),"trackId")
 k=h==null?null:J.cH(h)
 n.push(14)
