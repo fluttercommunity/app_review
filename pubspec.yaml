@@ -4,7 +4,7 @@ version: 2.1.0-nullsafety.0
 author: Rody Davis <rody.davis.jr@gmail.com>
 maintainer: Rody Davis (@rodydavis)
 homepage: https://github.com/rodydavis/plugins
-issue_tracker: https://github.com/fluttercommunity/app_review
+repository: https://github.com/fluttercommunity/app_review
 
 environment:
   sdk: '>=2.12.0-259.8.beta <3.0.0'
