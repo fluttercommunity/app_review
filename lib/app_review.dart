@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:package_info/package_info.dart';
@@ -117,12 +118,12 @@ class AppReview {
       final reviewUrl = 'itunes.apple.com/app/id$id?mt=8&action=write-review';
 
       if (await canLaunch('itms-apps://$reviewUrl')) {
-        print('launching store page');
-        launch('itms-apps://$reviewUrl');
+        debugPrint('launching store page');
+        await launch('itms-apps://$reviewUrl');
         return 'Launched App Store Directly: $reviewUrl';
       }
 
-      launch('https://$reviewUrl');
+      await launch('https://$reviewUrl');
       return 'Launched App Store: $reviewUrl';
     }
 
@@ -163,7 +164,7 @@ class AppReview {
     final markerUrl = 'market://details?id=$bundle';
 
     if (await canLaunch(markerUrl)) {
-      print('launching store page');
+      debugPrint('launching store page');
       launch(markerUrl);
       return 'Launched Google Play Directly: $bundle';
     }
@@ -181,7 +182,7 @@ class AppReview {
   static Future<PackageInfo?> getPackageInfo() async {
     _packageInfo ??= await PackageInfo.fromPlatform();
 
-    print('App Name: ${_packageInfo!.appName}\n'
+    debugPrint('App Name: ${_packageInfo!.appName}\n'
         'Package Name: ${_packageInfo!.packageName}\n'
         'Version: ${_packageInfo!.version}\n'
         'Build Number: ${_packageInfo!.buildNumber}');
@@ -219,15 +220,16 @@ class AppReview {
     if (id.isNotEmpty) {
       try {
         final result = await http
-            .get(Uri.parse('https://itunes.apple.com/$country/lookup?bundleId=$id'))
+            .get(Uri.parse(
+                'https://itunes.apple.com/$country/lookup?bundleId=$id'))
             .timeout(const Duration(seconds: 5));
         final Map json = jsonDecode(result.body);
         appId = json['results'][0]['trackId']?.toString();
       } finally {
         if (appId?.isNotEmpty == true) {
-          print('Track ID: $appId');
+          debugPrint('Track ID: $appId');
         } else {
-          print('Application with bundle $id is not found on App Store');
+          debugPrint('Application with bundle $id is not found on App Store');
         }
       }
     }

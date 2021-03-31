@@ -1,6 +1,8 @@
 ## 2.1.1
 
 * Upgrading dependencies
+* Changing to https
+* Updating android version
 
 ## 2.1.0-nullsafety
 
