@@ -19,7 +19,7 @@ Flutter Plugin for Requesting and Writing Reviews in Google Play and the App Sto
 It's important to note that the App ID must match the App ID in Google Play and iTunes Connect. This can be changed in the Info.plist on iOS and app/build.gradle on Android. You will use this App ID for other services like Firebase, Admob and publishing the app. 
 
 #### Android
-Opens In App Review but only if Play Services are installed on the device and the App is downloaded through the Play Store. Check out the [![official documentation](https://developer.android.com/guide/playcore/in-app-review)].
+Opens In App Review but only if Play Services are installed on the device and the App is downloaded through the Play Store. Check out the [official documentation](https://developer.android.com/guide/playcore/in-app-review).
 
 #### iOS
 iOS manages the pop-up requesting review within an app. You can call the code through `AppReview.requestReview` and if the user has "rate in apps" turned on, iOS will send "the request for the review" pop up. This is the required way for requesting reviews after iOS 10.3.
