@@ -219,8 +219,7 @@ class AppReview {
     if (id.isNotEmpty) {
       try {
         final result = await http
-            .get(Uri.parse(
-                'http://itunes.apple.com/$country/lookup?bundleId=$id'))
+            .get(Uri.parse('https://itunes.apple.com/$country/lookup?bundleId=$id'))
             .timeout(const Duration(seconds: 5));
         final Map json = jsonDecode(result.body);
         appId = json['results'][0]['trackId']?.toString();
