@@ -15248,7 +15248,7 @@ s=J.bx(m)!==0?10:11
 break
 case 10:p=12
 s=15
-return P.Z(G.ak7(P.kW("http://itunes.apple.com/"+H.c(l)+"/lookup?bundleId="+H.c(m),0,null)).wx(0,C.fQ),$async$jB)
+return P.Z(G.ak7(P.kW("https://itunes.apple.com/"+H.c(l)+"/lookup?bundleId="+H.c(m),0,null)).wx(0,C.fQ),$async$jB)
 case 15:j=d
 h=j
 i=C.ay.CM(0,B.ak0(U.ain(h.e).c.a.i(0,"charset")).cu(0,h.x),null)
