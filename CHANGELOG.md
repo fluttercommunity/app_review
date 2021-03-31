@@ -1,3 +1,11 @@
+## 2.1.1
+
+* Upgrading dependencies
+
+## 2.1.0-nullsafety
+
+* Null Safety
+
 ## 2.0.0
 
 * Support for ([In App Review](https://developer.android.com/guide/playcore/in-app-review)) on Android (#37) @jonasbark
