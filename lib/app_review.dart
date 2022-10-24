@@ -116,14 +116,14 @@ class AppReview {
     if (compose) {
       final id = appId ?? (await getIosAppId()) ?? '';
       final reviewUrl = 'itunes.apple.com/app/id$id?mt=8&action=write-review';
-
-      if (await canLaunch('itms-apps://$reviewUrl')) {
+      final uri = Uri.parse('itms-apps://$reviewUrl');
+      if (await canLaunchUrl(uri)) {
         debugPrint('launching store page');
-        await launch('itms-apps://$reviewUrl');
+        await launchUrl(uri);
         return 'Launched App Store Directly: $reviewUrl';
       }
 
-      await launch('https://$reviewUrl');
+      await launchUrl(Uri.parse('https://$reviewUrl'));
       return 'Launched App Store: $reviewUrl';
     }
 
@@ -136,7 +136,7 @@ class AppReview {
   static Future<String?> openAndroidReview() {
     try {
       return _channel.invokeMethod<String>('requestReview');
-    } on dynamic {
+    } on Error {
       return openGooglePlay();
     }
   }
@@ -146,12 +146,13 @@ class AppReview {
     final appId = await getIosAppId() ?? '';
 
     if (appId.isNotEmpty) {
-      launch('https://itunes.apple.com/app/id$appId');
+      launchUrl(Uri.parse('https://itunes.apple.com/app/id$appId'),
+          mode: LaunchMode.externalApplication);
       return 'Launched App Store';
     }
 
     if (fallbackUrl != null) {
-      launch(fallbackUrl);
+      launchUrl(Uri.parse(fallbackUrl), mode: LaunchMode.externalApplication);
       return 'Launched App Store via $fallbackUrl';
     }
 
@@ -162,23 +163,24 @@ class AppReview {
   static Future<String> openGooglePlay({String? fallbackUrl}) async {
     final bundle = await getBundleName() ?? '';
     final markerUrl = 'market://details?id=$bundle';
-
-    if (await canLaunch(markerUrl)) {
+    final uri = Uri.parse(markerUrl);
+    if (await canLaunchUrl(uri)) {
       debugPrint('launching store page');
-      launch(markerUrl);
+      launchUrl(uri, mode: LaunchMode.externalApplication);
       return 'Launched Google Play Directly: $bundle';
     }
 
     if (fallbackUrl != null) {
-      launch(fallbackUrl);
+      launchUrl(Uri.parse(fallbackUrl), mode: LaunchMode.externalApplication);
       return 'Launched Google Play via $fallbackUrl';
     }
 
-    launch('https://play.google.com/store/apps/details?id=$bundle');
+    launchUrl(
+        Uri.parse('https://play.google.com/store/apps/details?id=$bundle'));
     return 'Launched Google Play: $bundle';
   }
 
-  /// Lazyload package info instance
+  /// Lazy load package info instance
   static Future<PackageInfo?> getPackageInfo() async {
     _packageInfo ??= await PackageInfo.fromPlatform();
 
