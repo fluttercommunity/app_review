@@ -6,7 +6,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/fluttercommunity/app_review?color=blue)](https://github.com/fluttercommunity/app_review)
 [![app_review](https://img.shields.io/pub/v/app_review.svg)](https://pub.dev/packages/app_review)
 
-# app_review
+# app_review_plus
 
 ![alt text](https://github.com/fluttercommunity/app_review/blob/master/screenshots/IMG_0024.PNG)
 
@@ -28,7 +28,7 @@ In debug mode it will always display. In apps through TestFlight, the `AppReview
 
 ``` dart
 import 'dart:io';
-import 'package:app_review/app_review.dart';
+import 'package:app_review/app_review_plus.dart';
 import 'package:flutter/material.dart';
 
   @override

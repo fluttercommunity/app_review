@@ -1,6 +1,6 @@
-name: app_review
-description: Request and Write Reviews and Open Store Listing for Android and iOS in Flutter.
-version: 2.1.2+1
+name: app_review_plus
+description: Fork of the app_review library. Request and Write Reviews and Open Store Listing for Android and iOS in Flutter.
+version: 2.1.3
 maintainer: Rody Davis (@rodydavis)
 homepage: https://github.com/rodydavis/plugins
 repository: https://github.com/fluttercommunity/app_review
@@ -11,7 +11,7 @@ environment:
 
 dependencies:
   http: ^0.13.5
-  package_info_plus: ^3.0.1
+  package_info_plus: ^3.1.2
   url_launcher: ^6.1.6
   flutter:
     sdk: flutter
@@ -20,7 +20,7 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.appleeducate.appreview
+        package: com.appleeducate.appreviewplus
         pluginClass: AppReviewPlugin
       ios:
         pluginClass: AppReviewPlugin
