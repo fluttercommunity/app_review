@@ -10,8 +10,7 @@ import 'package:flutter/foundation.dart';
 /// main is entry point of Flutter application
 void main() {
   // Desktop platforms aren't a valid platform.
-  _setTargetPlatformForDesktop();
-
+  if (!kIsWeb) _setTargetPlatformForDesktop();
   return runApp(MyApp());
 }
 
@@ -19,7 +18,7 @@ void main() {
 /// a supported platform (iOS for macOS, Android for Linux and Windows).
 /// Otherwise, do nothing.
 void _setTargetPlatformForDesktop() {
-  TargetPlatform targetPlatform;
+  TargetPlatform? targetPlatform;
   if (Platform.isMacOS) {
     targetPlatform = TargetPlatform.iOS;
   } else if (Platform.isLinux || Platform.isWindows) {
@@ -39,12 +38,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    AppReview.getAppID.then((String onValue) {
-      setState(() {
-        appID = onValue;
-      });
-      print("App ID" + appID);
-    });
+    AppReview.getAppID.then(log);
   }
 
   String appID = "";
@@ -66,12 +60,7 @@ class _MyAppState extends State<MyApp> {
                 title: const Text('App ID'),
                 subtitle: new Text(appID),
                 onTap: () {
-                  AppReview.getAppID.then((String onValue) {
-                    setState(() {
-                      output = onValue;
-                    });
-                    print(onValue);
-                  });
+                  AppReview.getAppID.then(log);
                 },
               ),
               const Divider(height: 20.0),
@@ -81,12 +70,7 @@ class _MyAppState extends State<MyApp> {
                 ),
                 title: const Text('View Store Page'),
                 onTap: () {
-                  AppReview.storeListing.then((String onValue) {
-                    setState(() {
-                      output = onValue;
-                    });
-                    print(onValue);
-                  });
+                  AppReview.storeListing.then(log);
                 },
               ),
               const Divider(height: 20.0),
@@ -96,12 +80,7 @@ class _MyAppState extends State<MyApp> {
                 ),
                 title: const Text('Request Review'),
                 onTap: () {
-                  AppReview.requestReview.then((String onValue) {
-                    setState(() {
-                      output = onValue;
-                    });
-                    print(onValue);
-                  });
+                  AppReview.requestReview.then(log);
                 },
               ),
               const Divider(height: 20.0),
@@ -111,12 +90,7 @@ class _MyAppState extends State<MyApp> {
                 ),
                 title: const Text('Write a New Review'),
                 onTap: () {
-                  AppReview.writeReview.then((String onValue) {
-                    setState(() {
-                      output = onValue;
-                    });
-                    print(onValue);
-                  });
+                  AppReview.writeReview.then(log);
                 },
               ),
               const Divider(height: 20.0),
@@ -126,5 +100,14 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
     );
+  }
+
+  void log(String? message) {
+    if (message != null) {
+      setState(() {
+        output = message;
+      });
+      print(message);
+    }
   }
 }

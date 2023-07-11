@@ -1,8 +1,118 @@
-# app_review_example
+# Example
 
-Demonstrates how to use the app_review plugin.
+```dart
+import 'package:app_review/app_review.dart';
+import 'package:flutter/material.dart';
 
-## Getting Started
+import 'dart:io' show Platform;
+import 'package:flutter/foundation.dart';
 
-For help getting started with Flutter, view our online
-[documentation](https://flutter.io/).
+// The existing imports
+// !! Keep your existing impots here !!
+
+/// main is entry point of Flutter application
+void main() {
+  // Desktop platforms aren't a valid platform.
+  if (!kIsWeb) _setTargetPlatformForDesktop();
+  return runApp(MyApp());
+}
+
+/// If the current platform is desktop, override the default platform to
+/// a supported platform (iOS for macOS, Android for Linux and Windows).
+/// Otherwise, do nothing.
+void _setTargetPlatformForDesktop() {
+  TargetPlatform? targetPlatform;
+  if (Platform.isMacOS) {
+    targetPlatform = TargetPlatform.iOS;
+  } else if (Platform.isLinux || Platform.isWindows) {
+    targetPlatform = TargetPlatform.android;
+  }
+  if (targetPlatform != null) {
+    debugDefaultTargetPlatformOverride = targetPlatform;
+  }
+}
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => new _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    AppReview.getAppID.then(log);
+  }
+
+  String appID = "";
+  String output = "";
+
+  @override
+  Widget build(BuildContext context) {
+    return new MaterialApp(
+      home: new Scaffold(
+        appBar: new AppBar(title: const Text('App Review')),
+        body: new SingleChildScrollView(
+          child: new ListBody(
+            children: <Widget>[
+              new Container(
+                height: 40.0,
+              ),
+              new ListTile(
+                leading: const Icon(Icons.info),
+                title: const Text('App ID'),
+                subtitle: new Text(appID),
+                onTap: () {
+                  AppReview.getAppID.then(log);
+                },
+              ),
+              const Divider(height: 20.0),
+              new ListTile(
+                leading: const Icon(
+                  Icons.shop,
+                ),
+                title: const Text('View Store Page'),
+                onTap: () {
+                  AppReview.storeListing.then(log);
+                },
+              ),
+              const Divider(height: 20.0),
+              new ListTile(
+                leading: const Icon(
+                  Icons.star,
+                ),
+                title: const Text('Request Review'),
+                onTap: () {
+                  AppReview.requestReview.then(log);
+                },
+              ),
+              const Divider(height: 20.0),
+              new ListTile(
+                leading: const Icon(
+                  Icons.note_add,
+                ),
+                title: const Text('Write a New Review'),
+                onTap: () {
+                  AppReview.writeReview.then(log);
+                },
+              ),
+              const Divider(height: 20.0),
+              new ListTile(title: new Text(output)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void log(String? message) {
+    if (message != null) {
+      setState(() {
+        output = message;
+      });
+      print(message);
+    }
+  }
+}
+
+```
