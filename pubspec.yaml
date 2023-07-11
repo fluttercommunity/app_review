@@ -1,25 +1,26 @@
 name: app_review
 description: Request and Write Reviews and Open Store Listing for Android and iOS in Flutter.
-version: 1.0.1
-author: Rody Davis <rody.davis.jr@gmail.com>
-maintainer: Rody Davis (@AppleEducate)
-homepage: https://github.com/fluttercommunity/app_review
+version: 2.1.2+1
+maintainer: Rody Davis (@rodydavis)
+homepage: https://github.com/rodydavis/plugins
+repository: https://github.com/fluttercommunity/app_review
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.16.0 <3.0.0"
+  flutter: ^1.10.0
 
 dependencies:
-  http: ^0.12.0+4
-  package_info: ^0.4.0+13
-  url_launcher: ^5.4.1
+  http: ^0.13.5
+  package_info_plus: ^3.0.1
+  url_launcher: ^6.1.6
   flutter:
     sdk: flutter
 
-# For information on the generic Dart part of this file, see the
-# following page: https://www.dartlang.org/tools/pub/pubspec
-
-# The following section is specific to Flutter.
 flutter:
   plugin:
-    androidPackage: com.appleeducate.appreview
-    pluginClass: AppReviewPlugin
+    platforms:
+      android:
+        package: com.appleeducate.appreview
+        pluginClass: AppReviewPlugin
+      ios:
+        pluginClass: AppReviewPlugin

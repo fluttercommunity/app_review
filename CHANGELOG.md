@@ -1,3 +1,35 @@
+## 2.1.2
+
+* Upgrading dependencies
+
+## 2.1.1
+
+* Upgrading dependencies
+* Changing to https
+* Updating android version
+
+## 2.1.0-nullsafety
+
+* Null Safety
+
+## 2.0.0
+
+* Support for ([In App Review](https://developer.android.com/guide/playcore/in-app-review)) on Android (#37) @jonasbark
+
+## 1.1.2
+
+* Updates to plugin
+* Adding Delayed Review
+
+## 1.1.1
+
+* Prepare for 1.0.0 version of sensors and package_info. ([dart_lsc](http://github.com/amirh/dart_lsc))
+
+## 1.1.0
+
+* Merging PRs
+* Bumping Version
+
 ## 1.0.1
 
 * Updating version
