@@ -4,7 +4,7 @@
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WSH3GVC49GNNJ)
 ![github pages](https://github.com/fluttercommunity/app_review/workflows/github%20pages/badge.svg)
 [![GitHub stars](https://img.shields.io/github/stars/fluttercommunity/app_review?color=blue)](https://github.com/fluttercommunity/app_review)
-[![app_review](https://img.shields.io/pub/v/app_review.svg)](https://pub.dev/packages/app_review)
+[![app_review](https://img.shields.io/pub/v/app_review_plus.svg)](https://pub.dev/packages/app_review_plus)
 
 # app_review_plus
 
