@@ -1,6 +1,7 @@
 ## 2.1.3
 
-* Rename library.
+* Fork library as `app_review_plus`.
+* Update dependencies.
 
 ## 2.1.2
 
