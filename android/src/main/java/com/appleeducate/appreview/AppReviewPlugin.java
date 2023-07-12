@@ -1,4 +1,4 @@
-package com.appleeducate.appreviewplus;
+package com.appleeducate.appreview;
 
 import android.app.Activity;
 
