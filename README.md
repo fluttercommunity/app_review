@@ -8,7 +8,7 @@
 
 # app_review_plus
 
-![alt text](https://github.com/fluttercommunity/app_review/blob/master/screenshots/IMG_0024.PNG)
+![alt text](https://github.com/Innim/flutter_app_review/blob/master/screenshots/IMG_0024.PNG)
 
 Online Demo: https://fluttercommunity.github.io/app_review/
 
