@@ -1,4 +1,4 @@
-name: app_review_example
+name: app_review_plus_example
 description: Demonstrates how to use the app_review plugin.
 
 environment:
@@ -14,7 +14,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  app_review:
+  app_review_plus:
     path: ../
 
 flutter:

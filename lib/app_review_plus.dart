@@ -10,7 +10,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class AppReview {
   static const Duration kDefaultDuration = Duration(minutes: 5);
-  static const MethodChannel _channel = MethodChannel('app_review');
+  static const MethodChannel _channel = MethodChannel('app_review_plus');
 
   //----------------------------------------------------------------------------
   // Maintain original interface

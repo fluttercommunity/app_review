@@ -1,14 +1,10 @@
-[![Flutter Community: app_review](https://fluttercommunity.dev/_github/header/app_review)](https://github.com/fluttercommunity/community)
+Fork of [Flutter Community: app_review](https://github.com/fluttercommunity/app_review) with updated dependencies.
 
-[![Buy Me A Coffee](https://img.shields.io/badge/Donate-Buy%20Me%20A%20Coffee-yellow.svg)](https://www.buymeacoffee.com/rodydavis)
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WSH3GVC49GNNJ)
-![github pages](https://github.com/fluttercommunity/app_review/workflows/github%20pages/badge.svg)
-[![GitHub stars](https://img.shields.io/github/stars/fluttercommunity/app_review?color=blue)](https://github.com/fluttercommunity/app_review)
-[![app_review](https://img.shields.io/pub/v/app_review.svg)](https://pub.dev/packages/app_review)
+[![app_review](https://img.shields.io/pub/v/app_review_plus.svg)](https://pub.dev/packages/app_review_plus)
 
-# app_review
+# app_review_plus
 
-![alt text](https://github.com/fluttercommunity/app_review/blob/master/screenshots/IMG_0024.PNG)
+![alt text](https://github.com/Innim/flutter_app_review/blob/master/screenshots/IMG_0024.PNG)
 
 Online Demo: https://fluttercommunity.github.io/app_review/
 
@@ -28,7 +24,7 @@ In debug mode it will always display. In apps through TestFlight, the `AppReview
 
 ``` dart
 import 'dart:io';
-import 'package:app_review/app_review.dart';
+import 'package:app_review/app_review_plus.dart';
 import 'package:flutter/material.dart';
 
   @override

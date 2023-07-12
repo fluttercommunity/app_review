@@ -1,6 +1,6 @@
 import 'package:package_info_plus/package_info_plus.dart';
 
-import '../app_review.dart';
+import '../app_review_plus.dart';
 
 /// Lazyload package info instance
 Future<PackageInfo?> getPackageInfo() async => AppReview.getPackageInfo();

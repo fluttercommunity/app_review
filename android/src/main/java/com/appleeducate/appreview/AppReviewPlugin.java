@@ -25,7 +25,7 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 /** AppReviewPlugin */
 public class AppReviewPlugin implements FlutterPlugin, MethodCallHandler, ActivityAware {
-  private static final String CHANNEL_NAME = "app_review";
+  private static final String CHANNEL_NAME = "app_review_plus";
 
   private WeakReference<Activity> currentActivity;
 

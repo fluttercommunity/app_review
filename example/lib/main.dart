@@ -1,4 +1,4 @@
-import 'package:app_review/app_review.dart';
+import 'package:app_review_plus/app_review_plus.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:io' show Platform;

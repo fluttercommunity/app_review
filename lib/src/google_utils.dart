@@ -1,4 +1,4 @@
-import '../app_review.dart';
+import '../app_review_plus.dart';
 
 /// Get app bundle name
 Future<String?> getAppId() => AppReview.getBundleName();

@@ -1,4 +1,4 @@
-import '../app_review.dart';
+import '../app_review_plus.dart';
 
 /// Returns Apple ID for iOS application.
 ///
