@@ -1,3 +1,7 @@
+## 2.1.3+1
+
+* Fix naming package for ios.
+
 ## 2.1.3
 
 * Fork library as `app_review_plus`.

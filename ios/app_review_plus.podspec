@@ -2,7 +2,7 @@
 # To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
 #
 Pod::Spec.new do |s|
-  s.name             = 'app_review'
+  s.name             = 'app_review_plus'
   s.version          = '1.0.1'
   s.summary          = 'Request and Write Reviews and Open Store Listing for Android&#x2F;iOS in Flutter.'
   s.description      = <<-DESC
