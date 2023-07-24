@@ -6,7 +6,7 @@ issue_tracker: https://github.com/Innim/flutter_app_review/issues
 
 environment:
   sdk: ">=2.16.0 <3.0.0"
-  flutter: ^1.10.0
+  flutter: ">=3.0.0"
 
 dependencies:
   http: ^0.13.5
