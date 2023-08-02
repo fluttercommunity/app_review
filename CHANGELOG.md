@@ -1,3 +1,10 @@
+## 2.1.3
+
+* Chore: code clean
+* upgrade package_info_plus 4+
+* upgrade android min sdk 19
+* upgrade android gradle 7.4.2, agp 7.2.2
+
 ## 2.1.2
 
 * Upgrading dependencies
