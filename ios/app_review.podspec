@@ -17,6 +17,6 @@ Request and Write Reviews and Open Store Listing for Android&#x2F;iOS in Flutter
   s.dependency 'Flutter'
   s.swift_version = "5"
   
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '11.0'
 end
 
