@@ -2,13 +2,13 @@ name: app_review_example
 description: Demonstrates how to use the app_review plugin.
 
 environment:
-  sdk: '>=2.12.0-259.8.beta <3.0.0'
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^0.1.0
+  cupertino_icons: ^1.0.6
 
 dev_dependencies:
   flutter_test:
