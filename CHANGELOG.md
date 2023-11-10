@@ -1,3 +1,7 @@
+## 2.1.3
+
+* Update version constraints `http: ">=0.13.5 <2.0.0"` for wider compatibility
+
 ## 2.1.2
 
 * Upgrading dependencies
