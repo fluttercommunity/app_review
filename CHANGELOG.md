@@ -1,3 +1,7 @@
+## 2.1.3
+
+* Upgrading package_info_plus version to 6.0.0 which add privacy manifest for IOS
+
 ## 2.1.2
 
 * Upgrading dependencies
