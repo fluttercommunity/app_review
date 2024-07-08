@@ -22,10 +22,11 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 34
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 24
+        targetSdkVersion 34
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     lintOptions {
@@ -35,5 +36,7 @@ android {
 
 dependencies {
     api 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.android.play:core:1.8.2'
+    // This dependency is downloaded from the [Google’s Maven repository](https://developer.android.com/studio/build/dependencies#google-maven).
+    // Make sure you also include that repository in your project's build.gradle file.
+    implementation 'com.google.android.play:review:2.0.1'
 }
