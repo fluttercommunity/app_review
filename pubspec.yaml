@@ -6,13 +6,15 @@ homepage: https://github.com/rodydavis/plugins
 repository: https://github.com/fluttercommunity/app_review
 
 environment:
-  sdk: ">=2.16.0 <3.0.0"
+  sdk: '>=3.0.0 <4.0.0'
   flutter: ^1.10.0
 
 dependencies:
   http: ^1.1.0
-  package_info_plus: ^4.1.0
+
   url_launcher: ^6.1.7
+  package_info_plus: ^5.0.0
+  
   flutter:
     sdk: flutter
 

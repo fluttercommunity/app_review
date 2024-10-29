@@ -5,13 +5,16 @@ description: Demonstrates how to use the app_review plugin.
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.16.0 <3.0.0'
+
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.5
+
+  cupertino_icons: ^1.0.6
+
 
 dev_dependencies:
   flutter_test:
