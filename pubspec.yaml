@@ -11,8 +11,10 @@ environment:
 
 dependencies:
   http: ^1.1.0
+
+  url_launcher: ^6.1.7
   package_info_plus: ^5.0.0
-  url_launcher: ^6.1.6
+  
   flutter:
     sdk: flutter
 
