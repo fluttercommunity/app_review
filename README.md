@@ -12,6 +12,9 @@
 
 Online Demo: https://fluttercommunity.github.io/app_review/
 
+> [!WARNING]
+> This project has moved here: https://github.com/rodydavis/packages.dart
+
 ## Description
 Flutter Plugin for Requesting and Writing Reviews in Google Play and the App Store. Apps have to be published for the app to be found correctly.
 
